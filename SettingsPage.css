@@ -1,0 +1,106 @@
+/* SettingsPage.css */
+
+.settings-page {
+    padding: 24px;
+    max-width: 768px;
+    margin: 0 auto;
+  }
+  
+  .settings-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 24px;
+  }
+  
+  .settings-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  
+  /* Card Styling */
+  .settings-card-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .icon {
+    height: 20px;
+    width: 20px;
+  }
+  
+  /* Input Field Styling */
+  .input-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  
+  .input-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .input-label {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  
+  .input-field {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Settings Option Styling */
+  .settings-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 0;
+  }
+  
+  .option-title {
+    font-size: 16px;
+    font-weight: 500;
+  }
+  
+  .option-description {
+    font-size: 14px;
+    color: #6b7280; /* Tailwind Gray-500 */
+  }
+  
+  .link-button {
+    color: #2563eb; /* Tailwind Blue-600 */
+    font-size: 14px;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  
+  /* Save Button */
+  .save-button-container {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .save-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #2563eb; /* Tailwind Blue-600 */
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+  }
+  
+  .save-button:hover {
+    background-color: #1d4ed8; /* Tailwind Blue-700 */
+  }
+  

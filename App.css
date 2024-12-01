@@ -1,0 +1,372 @@
+/* Enhanced AdminDashboard.css */
+
+/* Enhanced Styling for Header Search Bar and Icons */
+.top-header {
+  position: fixed;
+  top: 0;
+  left: 16rem; /* Matches sidebar width */
+  right: 0;
+  z-index: 900;
+  display: flex;
+  align-items: center; /* Ensures vertical alignment */
+  justify-content: space-between;
+  height: 4rem;
+  padding: 0 1.5rem;
+  background: linear-gradient(to right, #ffffff, #f4f7fc);
+  border-bottom: 1px solid #e0e6ef;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Add this to the existing CSS */
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem; /* Add spacing from the search bar if needed */
+}
+
+.logo {
+  width: 120px; /* Adjust width for better visibility */
+  height: auto;
+  max-height: 60px; /* Limit the height to fit well within the header */
+  object-fit: contain; /* Ensures logo retains aspect ratio */
+}
+
+
+/* Updated Search Bar */
+.search-bar {
+  position: relative;
+  display: flex;
+  align-items: center; /* Ensures icon and input align properly */
+  flex: 1;
+  max-width: 400px;
+  margin-right: 1rem; /* Ensures spacing between search bar and icon */
+  background-color: #f0f0f0;
+  border-radius: 0.5rem;
+}
+
+.search-input {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  padding-left: 2.5rem; /* Space for the icon */
+  font-size: 0.875rem;
+  border: none; /* Removed border for clean look */
+  border-radius: 0.5rem;
+  transition: border-color 0.3s ease;
+}
+
+.search-input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 8px rgba(37, 99, 235, 0.3);
+  outline: none;
+}
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  left: 0.75rem;
+  transform: translateY(-50%);
+  font-size: 1.25rem;
+  color: #9ca3af;
+}
+
+/* Notification Icon Fix */
+.notification-icon {
+  font-size: 1.5rem;
+  color: #6b7280;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
+}
+
+.notification-icon:hover {
+  color: #1e40af;
+}
+
+/* General Layout Fix */
+.top-header > * {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 16rem;
+  background: linear-gradient(to bottom, #ffffff, #f4f7fc);
+  border-right: 1px solid #e0e6ef;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  overflow-y: auto;
+}
+
+.sidebar-header {
+  padding: 1rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111827;
+  border-bottom: 1px solid #e0e6ef;
+}
+
+.sidebar-nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-nav .nav-item {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  color: #6b7280;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.sidebar-nav .nav-item:hover,
+.sidebar-nav .nav-item.active {
+  background-color: #e0efff;
+  color: #1e40af;
+  font-weight: 500;
+}
+
+/* Main Content */
+.main-content {
+  margin-top: 4rem;
+  margin-left: 16rem;
+  padding: 2rem;
+  transition: all 0.3s;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  padding: 1.5rem;
+  background: #ffffff;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: transform 0.3s ease-in-out;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+/* Table Styles */
+.table-container {
+  background: #ffffff;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.user-table th {
+  padding: 1rem;
+  background-color: #f9fafb;
+  color: #111827;
+  font-weight: 600;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.user-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+  color: #4b5563;
+}
+
+.user-table .actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.action-btn {
+  display: inline-block;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: #2563eb;
+  color: white;
+  text-align: center;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.action-btn:hover {
+  background-color: #1e40af;
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 768px) {
+  .sidebar {
+      width: 100%;
+      position: static;
+      box-shadow: none;
+  }
+
+  .top-header {
+      left: 0;
+  }
+
+  .main-content {
+      margin: 0;
+  }
+
+  .stats-grid {
+      grid-template-columns: 1fr;
+  }
+}
+.nav-item.active {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.nav-item:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f5f5;
+  padding: 20px;
+}
+
+.auth-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.auth-header h2 {
+  color: #333;
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-group {
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6b7280;
+  width: 20px;
+  height: 20px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px 12px 12px 40px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.auth-submit {
+  background-color: #2563eb;
+  color: white;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 1rem;
+}
+
+.auth-submit:hover {
+  background-color: #1d4ed8;
+}
+
+.auth-footer {
+  margin-top: 1.5rem;
+  text-align: center;
+  color: #6b7280;
+}
+
+.toggle-auth {
+  background: none;
+  border: none;
+  color: #2563eb;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 0.5rem;
+}
+
+.toggle-auth:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 1.5rem;
+  }
+  
+  .auth-header h2 {
+    font-size: 1.5rem;
+  }
+}
