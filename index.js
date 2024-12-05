@@ -1,29 +1,20 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
-const userRoutes = require("./routes/userRoutes");
-const connectionRoutes = require('./routes/connectionRoutes');
-const transactionRoutes = require('./routes/transactionRoutes');
-const searchRoutes = require('./routes/searchRoutes');
-const app = express();
+import React from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { BrowserRouter } from "react-router-dom";
+import "./global.css";
 
-// Middleware
-app.use(bodyParser.json());
+const container = document.getElementById("root");
+const root = createRoot(container);
 
-// MongoDB connection
-mongoose
-  .connect("mongodb://127.0.0.1:27017/investnet")
-  .then(() => console.log("Connected to MongoDB"))
-  .catch((err) => console.error("MongoDB connection error:", err));
+root.render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+);
 
-// Routes
-app.use("/api/users", userRoutes);
-app.use('/api/connections', connectionRoutes);
-app.use('/api/transactions', transactionRoutes);
-app.use('/api/search', searchRoutes);
-
-// Start server
-const PORT = 5000;
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
