@@ -1,47 +1,81 @@
 const mongoose = require("mongoose");
 
-const UserSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-  role: { type: String, enum: ["Admin", "Investor", "Business", "General User"], required: true },
-  registrationDate: { type: Date, default: Date.now },
-  lastLogin: { type: Date, default: null },
+const userSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  role: {
+    type: String,
+    required: true,
+    enum: ["Admin", "Investor", "Business", "General User"],
+  },
+  registrationDate: {
+    type: Date,
+    default: Date.now,
+  },
+  lastLogin: {
+    type: Date,
+    default: Date.now,
+  },
   profile: {
-    bio: { type: String, default: "" },
+    bio: String,
     preferences: {
-      industries: [{ type: String }],
-      locations: [{ type: String }],
+      industries: [String],
+      locations: [String],
       fundingRange: {
-        min: { type: Number, default: 0 },
-        max: { type: Number, default: 0 },
+        min: Number,
+        max: Number,
       },
     },
-    documents: [{ type: String }], // URLs
-    registrationStatus: { type: String, enum: ["Approved", "Rejected", "Waiting"], default: "Waiting" },
+    documents: [String],
+    registrationStatus: {
+      type: String,
+      enum: ["Approved", "Rejected", "Waiting"],
+      default: "Waiting",
+    },
     metrics: {
-      profileViews: { type: Number, default: 0 },
-      postEngagement: { type: Number, default: 0 },
+      profileViews: {
+        type: Number,
+        default: 0,
+      },
+      postEngagement: {
+        type: Number,
+        default: 0,
+      },
     },
   },
   chats: [
     {
-      chatId: { type: mongoose.Schema.Types.ObjectId, ref: "Chat" },
-      participants: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+      chatId: mongoose.Schema.Types.ObjectId,
+      participants: [mongoose.Schema.Types.ObjectId],
       lastMessage: {
-        content: { type: String },
-        timestamp: { type: Date },
+        content: String,
+        timestamp: Date,
       },
-      createdAt: { type: Date, default: Date.now },
+      createdAt: Date,
     },
   ],
   notifications: [
     {
-      message: { type: String },
-      timestamp: { type: Date, default: Date.now },
-      isRead: { type: Boolean, default: false },
+      message: String,
+      timestamp: Date,
+      isRead: {
+        type: Boolean,
+        default: false,
+      },
     },
   ],
 });
 
-module.exports = mongoose.model("User", UserSchema);
+const User = mongoose.model("User", userSchema);
+module.exports = User;
