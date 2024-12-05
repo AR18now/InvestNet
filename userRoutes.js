@@ -1,5 +1,6 @@
 const express = require("express");
 const {
+  createUser,
   getAllUsers,
   getUserById,
   updateUser,
@@ -9,10 +10,22 @@ const {
 
 const router = express.Router();
 
-router.get("/", getAllUsers); // Get all users
-router.get("/:id", getUserById); // Get a single user by ID
-router.put("/:id", updateUser); // Update a user
-router.delete("/:id", deleteUser); // Delete a user
-router.post("/search", searchUsers); // Search and filter users
+// Route for creating a new user
+router.post("/", createUser);
+
+// Route to get all users
+router.get("/", getAllUsers);
+
+// Route to get a single user by ID
+router.get("/:id", getUserById);
+
+// Route to update a user by ID
+router.put("/:id", updateUser);
+
+// Route to delete a user by ID
+router.delete("/:id", deleteUser);
+
+// Route to search and filter users
+router.post("/search", searchUsers);
 
 module.exports = router;
