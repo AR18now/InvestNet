@@ -1,131 +1,205 @@
 import React, { useState } from 'react';
 import {
-  Bell,
-  Users,
-  FileCheck,
-  Flag,
-  BarChart2,
-  Search,
-  Menu
-} from 'lucide-react';
+  AppBar,
+  Toolbar,
+  IconButton,
+  Typography,
+  Box,
+  TextField,
+  Badge,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  Popper,
+  Paper,
+  ClickAwayListener,
+} from '@mui/material';
+import { Bell, Search, Menu } from 'lucide-react';
 import Sidebar from './Sidebar';
 import UserManagement from './UserManagement';
-import BusinessVerification from '../../BusinessVerification';
+import BusinessVerification from './BusinessVerification';
+import FlaggedContentPage from './FlaggedContentPage';
+import AnalyticsPage from './AnalyticsPage';
 import SettingsPage from './SettingsPage';
 import HelpCenter from './HelpCenter';
-import './AdminDashboard.css';
-import logo from './investnet.png'; // Import your logo image
+import NotificationsPage from './NotificationsPage';
+import logo from './investnet.png';
+import InvestorBusinessPosts from './InvestorBusinessPosts';
+
 
 const AdminDashboard = () => {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState('users');
+  const [activeTab, setActiveTab] = useState('users'); // Default active tab
+  const [showNotifications, setShowNotifications] = useState(false); // Notifications toggle
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const [searchAnchorEl, setSearchAnchorEl] = useState(null);
 
-  const stats = {
-    totalUsers: 2458,
-    pendingVerifications: 15,
-    flaggedContent: 8,
-    activeBusinesses: 384
+  const handleDrawerToggle = () => {
+    setIsMobileOpen(!isMobileOpen);
+  };
+
+  const handleNotificationClick = () => {
+    setShowNotifications(true);
+  };
+
+  const handleTabClick = (tab) => {
+    setActiveTab(tab);
+    setShowNotifications(false); // Close notifications when switching tabs
+  };
+
+  const sidebarItems = [
+    { name: 'User Management', tab: 'users' },
+    { name: 'Business Verification', tab: 'verification' },
+    { name: 'Flagged Content', tab: 'flagged' },
+    { name: 'Analytics', tab: 'analytics' },
+    { name: 'Settings', tab: 'settings' },
+    { name: 'Help Center', tab: 'help' },
+    { name: 'Investor & Business Posts', tab: 'posts' }
+
+  ];
+
+  const handleSearch = (event) => {
+    const value = event.target.value;
+    setSearchTerm(value);
+    if (value) {
+      const results = sidebarItems.filter((item) =>
+        item.name.toLowerCase().includes(value.toLowerCase())
+      );
+      setSearchResults(results);
+      setSearchAnchorEl(event.currentTarget);
+    } else {
+      setSearchResults([]);
+      setSearchAnchorEl(null);
+    }
+  };
+
+  const handleSearchResultClick = (tab) => {
+    setActiveTab(tab);
+    setSearchTerm('');
+    setSearchResults([]);
+    setSearchAnchorEl(null);
+  };
+
+  const handleCloseSearchResults = () => {
+    setSearchResults([]);
+    setSearchAnchorEl(null);
   };
 
   return (
-    <div className="dashboard-container">
+    <Box sx={{ display: 'flex', minHeight: '100vh' }}>
+      <AppBar
+  position="fixed"
+  sx={{
+    zIndex: (theme) => theme.zIndex.drawer + 1,
+    height: '80px', // Increased height for the AppBar
+  }}
+>
+  <Toolbar
+    sx={{
+      minHeight: '80px', // Match the AppBar height
+      display: 'flex',
+      justifyContent: 'space-between',
+    }}
+  >
+    <IconButton
+      color="inherit"
+      aria-label="open drawer"
+      edge="start"
+      onClick={handleDrawerToggle}
+      sx={{ display: { sm: 'none' } }} // Show only on mobile
+    >
+      <Menu />
+    </IconButton>
+    <img src={logo} alt="Logo" style={{ height: '50px', marginRight: '16px' }} />
+    <Typography variant="h6" noWrap sx={{ flexGrow: 1 }}>
+      Admin Dashboard
+    </Typography>
+    <Box sx={{ position: 'relative' }}>
+      <TextField
+        variant="outlined"
+        size="small"
+        placeholder="Search..."
+        value={searchTerm}
+        onChange={handleSearch}
+        sx={{
+          backgroundColor: 'white',
+          borderRadius: 1,
+          mr: 2,
+          '& input': { padding: '8px' },
+        }}
+        InputProps={{
+          startAdornment: <Search style={{ marginRight: '8px' }} />,
+        }}
+      />
+      {searchResults.length > 0 && (
+        <Popper
+          open
+          anchorEl={searchAnchorEl}
+          placement="bottom-start"
+          style={{ zIndex: 1300, width: '250px' }}
+        >
+          <ClickAwayListener onClickAway={handleCloseSearchResults}>
+            <Paper>
+              <List>
+                {searchResults.map((result) => (
+                  <ListItem key={result.tab} disablePadding>
+                    <ListItemButton onClick={() => handleSearchResultClick(result.tab)}>
+                      <ListItemText primary={result.name} />
+                    </ListItemButton>
+                  </ListItem>
+                ))}
+              </List>
+            </Paper>
+          </ClickAwayListener>
+        </Popper>
+      )}
+    </Box>
+    <IconButton color="inherit" onClick={handleNotificationClick}>
+      <Badge badgeContent={4} color="secondary">
+        <Bell />
+      </Badge>
+    </IconButton>
+  </Toolbar>
+</AppBar>
+
+
+      {/* Sidebar */}
       <Sidebar
         isMobileOpen={isMobileOpen}
         setIsMobileOpen={setIsMobileOpen}
         activeTab={activeTab}
-        setActiveTab={setActiveTab}
+        setActiveTab={handleTabClick} // Update active tab and hide notifications
       />
 
-      <div className="main-content">
-        <header className="top-header">
-          <button
-            className="mobile-menu-button"
-            onClick={() => setIsMobileOpen(true)}
-          >
-            <Menu className="icon" />
-          </button>
+      {/* Main Content */}
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          p: 3,
+          ml: { sm: `240px` }, // Sidebar width
+          width: { sm: `calc(100% - 240px)` },
+        }}
+      >
+        <Toolbar /> {/* Adds spacing for AppBar */}
+        {showNotifications ? (
+          <NotificationsPage setActiveTab={handleTabClick} /> // Pass the tab updater
+        ) : (
+          <>
+            {activeTab === 'users' && <UserManagement />}
+            {activeTab === 'verification' && <BusinessVerification />}
+            {activeTab === 'flagged' && <FlaggedContentPage />}
+            {activeTab === 'analytics' && <AnalyticsPage />}
+            {activeTab === 'settings' && <SettingsPage />}
+            {activeTab === 'help' && <HelpCenter />}
+            {activeTab === 'posts' && <InvestorBusinessPosts />}
 
-          <div className="header-content">
-            <div className="logo-container">
-              <img src={logo} alt="Logo" className="logo" />
-            </div>
-
-            <div className="search-container">
-              <div className="search-box">
-                <Search className="search-icon" />
-                <input
-                  type="text"
-                  placeholder="Search users, businesses, or content..."
-                  className="search-input"
-                />
-              </div>
-            </div>
-
-            <button className="notification-button">
-              <Bell className="icon" />
-            </button>
-          </div>
-        </header>
-
-        <main className="dashboard-main">
-          <div className="stats-grid">
-            <div className="stat-card">
-              <div className="stat-content">
-                <div className="stat-icon-container blue">
-                  <Users className="stat-icon" />
-                </div>
-                <div className="stat-info">
-                  <p className="stat-label">Total Users</p>
-                  <p className="stat-value">{stats.totalUsers}</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="stat-card">
-              <div className="stat-content">
-                <div className="stat-icon-container yellow">
-                  <FileCheck className="stat-icon" />
-                </div>
-                <div className="stat-info">
-                  <p className="stat-label">Pending Verifications</p>
-                  <p className="stat-value">{stats.pendingVerifications}</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="stat-card">
-              <div className="stat-content">
-                <div className="stat-icon-container red">
-                  <Flag className="stat-icon" />
-                </div>
-                <div className="stat-info">
-                  <p className="stat-label">Flagged Content</p>
-                  <p className="stat-value">{stats.flaggedContent}</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="stat-card">
-              <div className="stat-content">
-                <div className="stat-icon-container green">
-                  <BarChart2 className="stat-icon" />
-                </div>
-                <div className="stat-info">
-                  <p className="stat-label">Active Businesses</p>
-                  <p className="stat-value">{stats.activeBusinesses}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-       
-         
-        </main>
-        {activeTab === 'users' && <UserManagement />}
-          {activeTab === 'verification' && <BusinessVerification />}
-          {activeTab === 'settings' && <SettingsPage />}
-          {activeTab === 'help' && <HelpCenter />}
-      </div>
-    </div>
+          </>
+        )}
+      </Box>
+    </Box>
   );
 };
 
