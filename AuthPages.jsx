@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Mail, Lock, User } from 'lucide-react';
+import { Mail, Lock } from 'lucide-react';
+import axios from 'axios';  // Import axios
 import {
   Box,
   Button,
@@ -14,28 +15,35 @@ import {
 } from '@mui/material';
 
 const AuthPages = ({ setIsAuthenticated }) => {
-  const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
-    name: '',
     email: '',
     password: '',
   });
   const [error, setError] = useState('');
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [user, setUser] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (isLogin) {
-      if (formData.email === 'ali@example.com' && formData.password === '123456') {
-        alert('Login successful!');
-        setIsAuthenticated(true);
-      } else {
-        setError('Invalid credentials!');
-        setOpenSnackbar(true);
+
+    try {
+    // Using POST request to send email and password in the body
+    const response = await axios.post(
+      'http://localhost:5000/api/users/login', // Assuming you have a POST endpoint for login
+      {
+        email: formData.email,
+        password: formData.password,
       }
-    } else {
-      alert('Signup successful! You can now log in.');
-      setIsLogin(true);
+    );
+
+      if (response.data) {
+        setUser(response.data);
+        alert('User loggedin successfully!');
+        setIsAuthenticated(true);  // You can set this to true based on the result
+      }
+    } catch (err) {
+      setError(err.response?.data?.message || 'User not found');
+      setOpenSnackbar(true);
     }
   };
 
@@ -76,7 +84,7 @@ const AuthPages = ({ setIsAuthenticated }) => {
           }}
         >
           <Typography variant="h4" align="center" gutterBottom sx={{ color: '#1e88e5' }}>
-            {isLogin ? 'Welcome Back!' : 'Join Us Today!'}
+            Admin Login
           </Typography>
           <Typography
             variant="body1"
@@ -84,35 +92,10 @@ const AuthPages = ({ setIsAuthenticated }) => {
             gutterBottom
             sx={{ color: '#1e88e5', marginBottom: '20px' }}
           >
-            {isLogin ? 'Login to continue.' : 'Sign up to get started.'}
+            Enter your email and password.
           </Typography>
 
           <Box component="form" onSubmit={handleSubmit} sx={{ width: '100%' }}>
-            {!isLogin && (
-              <TextField
-                fullWidth
-                name="name"
-                label="Your Name"
-                placeholder="Enter your name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                margin="normal"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <User />
-                    </InputAdornment>
-                  ),
-                }}
-                sx={{
-                  '& .MuiOutlinedInput-root': {
-                    background: '#fff',
-                    borderRadius: '8px',
-                  },
-                }}
-              />
-            )}
             <TextField
               fullWidth
               name="email"
@@ -168,7 +151,8 @@ const AuthPages = ({ setIsAuthenticated }) => {
               sx={{
                 mt: 2,
                 padding: '12px',
-                background: '#ff4081',
+                background: '#1976d2',  // This is a blue shade
+
                 '&:hover': {
                   background: '#ff0077',
                 },
@@ -176,24 +160,9 @@ const AuthPages = ({ setIsAuthenticated }) => {
                 boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
               }}
             >
-              {isLogin ? 'Login' : 'Sign Up'}
+              Login
             </Button>
           </Box>
-          <Grid container justifyContent="center" sx={{ mt: 2 }}>
-            <Typography variant="body2" sx={{ color: '#1e88e5' }}>
-              {isLogin
-                ? "Don't have an account? "
-                : 'Already have an account? '}
-              <Button
-                variant="text"
-                onClick={() => setIsLogin((prev) => !prev)}
-                size="small"
-                sx={{ color: '#1e88e5', fontWeight: 'bold' }}
-              >
-                {isLogin ? 'Sign Up' : 'Login'}
-              </Button>
-            </Typography>
-          </Grid>
         </Paper>
       </Container>
 
