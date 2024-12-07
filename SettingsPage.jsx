@@ -1,6 +1,17 @@
 import React, { useState } from 'react';
+import {
+  Box,
+  Typography,
+  Grid,
+  TextField,
+  FormControlLabel,
+  Checkbox,
+  Button,
+  Card,
+  CardContent,
+  Switch,
+} from '@mui/material';
 import { Save, User, Lock, Bell } from 'lucide-react';
-import './SettingsPage.css';
 
 const SettingsPage = () => {
   const [notifications, setNotifications] = useState(true);
@@ -8,86 +19,114 @@ const SettingsPage = () => {
   const [twoFactorAuth, setTwoFactorAuth] = useState(false);
 
   return (
-    <div className="settings-page">
-      <h1 className="settings-title">Settings</h1>
-      
-      <div className="settings-section">
-        {/* Profile Settings */}
-        <div className="settings-card">
-          <h2 className="settings-card-title">
-            <User className="icon" />
-            Profile Settings
-          </h2>
-          <div className="input-container">
-            <div className="input-group">
-              <label className="input-label">Full Name</label>
-              <input type="text" className="input-field" placeholder="John Doe" />
-            </div>
-            <div className="input-group">
-              <label className="input-label">Email</label>
-              <input type="email" className="input-field" placeholder="john@example.com" />
-            </div>
-          </div>
-        </div>
+    <Box sx={{ padding: 4 }}>
+      {/* Page Title */}
+      <Typography variant="h4" gutterBottom>
+        Settings
+      </Typography>
 
-        {/* Security Settings */}
-        <div className="settings-card">
-          <h2 className="settings-card-title">
-            <Lock className="icon" />
+      {/* Profile Settings */}
+      <Card sx={{ mb: 3 }}>
+        <CardContent>
+          <Typography variant="h6" sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+            <User style={{ marginRight: 8 }} />
+            Profile Settings
+          </Typography>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                label="Full Name"
+                fullWidth
+                variant="outlined"
+                placeholder="John Doe"
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                label="Email"
+                type="email"
+                fullWidth
+                variant="outlined"
+                placeholder="john@example.com"
+              />
+            </Grid>
+          </Grid>
+        </CardContent>
+      </Card>
+
+      {/* Security Settings */}
+      <Card sx={{ mb: 3 }}>
+        <CardContent>
+          <Typography variant="h6" sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+            <Lock style={{ marginRight: 8 }} />
             Security
-          </h2>
-          <div className="settings-option">
-            <div>
-              <h3 className="option-title">Two-Factor Authentication</h3>
-              <p className="option-description">Add an extra layer of security</p>
-            </div>
-            <input
-              type="checkbox"
+          </Typography>
+          <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
+            <Box>
+              <Typography variant="subtitle1">Two-Factor Authentication</Typography>
+              <Typography variant="body2" color="textSecondary">
+                Add an extra layer of security
+              </Typography>
+            </Box>
+            <Switch
               checked={twoFactorAuth}
               onChange={(e) => setTwoFactorAuth(e.target.checked)}
             />
-          </div>
-          <button className="link-button">Change Password</button>
-        </div>
+          </Box>
+          <Button variant="text" color="primary">
+            Change Password
+          </Button>
+        </CardContent>
+      </Card>
 
-        {/* Notification Settings */}
-        <div className="settings-card">
-          <h2 className="settings-card-title">
-            <Bell className="icon" />
+      {/* Notification Settings */}
+      <Card sx={{ mb: 3 }}>
+        <CardContent>
+          <Typography variant="h6" sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+            <Bell style={{ marginRight: 8 }} />
             Notifications
-          </h2>
-          <div className="settings-option">
-            <div>
-              <h3 className="option-title">Push Notifications</h3>
-              <p className="option-description">Receive notifications about important updates</p>
-            </div>
-            <input
-              type="checkbox"
+          </Typography>
+
+          <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
+            <Box>
+              <Typography variant="subtitle1">Push Notifications</Typography>
+              <Typography variant="body2" color="textSecondary">
+                Receive notifications about important updates
+              </Typography>
+            </Box>
+            <Switch
               checked={notifications}
               onChange={(e) => setNotifications(e.target.checked)}
             />
-          </div>
-          <div className="settings-option">
-            <div>
-              <h3 className="option-title">Marketing Emails</h3>
-              <p className="option-description">Receive emails about new features and updates</p>
-            </div>
-            <input
-              type="checkbox"
+          </Box>
+
+          <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
+            <Box>
+              <Typography variant="subtitle1">Marketing Emails</Typography>
+              <Typography variant="body2" color="textSecondary">
+                Receive emails about new features and updates
+              </Typography>
+            </Box>
+            <Switch
               checked={marketingEmails}
               onChange={(e) => setMarketingEmails(e.target.checked)}
             />
-          </div>
-        </div>
-      </div>
+          </Box>
+        </CardContent>
+      </Card>
 
-      <div className="save-button-container">
-        <button className="save-button">
-          <Save className="icon" />
+      {/* Save Button */}
+      <Box textAlign="center">
+        <Button
+          variant="contained"
+          color="primary"
+          startIcon={<Save />}
+          sx={{ px: 4, py: 1.5 }}
+        >
           Save Changes
-        </button>
-      </div>
-    </div>
+        </Button>
+      </Box>
+    </Box>
   );
 };
 
