@@ -1,4 +1,16 @@
 import React, { useState } from 'react';
+import {
+  Box,
+  Typography,
+  Grid,
+  TextField,
+  Card,
+  CardContent,
+  Collapse,
+  IconButton,
+  Button,
+  Divider,
+} from '@mui/material';
 import { Search, ChevronDown, ChevronUp, MessageSquare, FileText, PhoneCall } from 'lucide-react';
 
 const HelpCenter = () => {
@@ -20,80 +32,126 @@ const HelpCenter = () => {
   ];
 
   return (
-    <div className="p-6 max-w-4xl mx-auto">
-      <h1 className="text-2xl font-bold mb-6">Help Center</h1>
+    <Box sx={{ padding: 4, maxWidth: '1200px', margin: '0 auto' }}>
+      {/* Page Title */}
+      <Typography variant="h4" gutterBottom>
+        Help Center
+      </Typography>
 
       {/* Search Section */}
-      <div className="mb-8">
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
-          <input
-            type="text"
-            placeholder="Search for help..."
-            className="w-full pl-10 pr-4 py-3 border rounded-lg"
-          />
-        </div>
-      </div>
+      <Box sx={{ mb: 6 }}>
+        <TextField
+          variant="outlined"
+          fullWidth
+          placeholder="Search for help..."
+          InputProps={{
+            startAdornment: (
+              <Search style={{ marginLeft: 8, marginRight: 8 }} />
+            ),
+          }}
+          sx={{ backgroundColor: 'white' }}
+        />
+      </Box>
 
       {/* Quick Actions */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-        <div className="p-4 hover:shadow-lg transition-shadow text-center">
-          <MessageSquare className="h-8 w-8 mb-2 text-blue-600" />
-          <h3 className="font-medium mb-1">Chat Support</h3>
-          <p className="text-sm text-gray-500">Get help from our team</p>
-        </div>
-        <div className="p-4 hover:shadow-lg transition-shadow text-center">
-          <FileText className="h-8 w-8 mb-2 text-blue-600" />
-          <h3 className="font-medium mb-1">Documentation</h3>
-          <p className="text-sm text-gray-500">Browse our guides</p>
-        </div>
-        <div className="p-4 hover:shadow-lg transition-shadow text-center">
-          <PhoneCall className="h-8 w-8 mb-2 text-blue-600" />
-          <h3 className="font-medium mb-1">Phone Support</h3>
-          <p className="text-sm text-gray-500">Call our support team</p>
-        </div>
-      </div>
+      <Grid container spacing={4} sx={{ mb: 6 }} justifyContent="center">
+        <Grid item xs={12} sm={4}>
+          <Card sx={{ textAlign: 'center', p: 2, boxShadow: 3 }}>
+            <MessageSquare sx={{ fontSize: 40, color: 'primary.main' }} />
+            <Typography variant="h6" sx={{ mt: 1 }}>
+              Chat Support
+            </Typography>
+            <Typography variant="body2" color="textSecondary">
+              Get help from our team
+            </Typography>
+          </Card>
+        </Grid>
+        <Grid item xs={12} sm={4}>
+          <Card sx={{ textAlign: 'center', p: 2, boxShadow: 3 }}>
+            <FileText sx={{ fontSize: 40, color: 'primary.main' }} />
+            <Typography variant="h6" sx={{ mt: 1 }}>
+              Documentation
+            </Typography>
+            <Typography variant="body2" color="textSecondary">
+              Browse our guides
+            </Typography>
+          </Card>
+        </Grid>
+        <Grid item xs={12} sm={4}>
+          <Card sx={{ textAlign: 'center', p: 2, boxShadow: 3 }}>
+            <PhoneCall sx={{ fontSize: 40, color: 'primary.main' }} />
+            <Typography variant="h6" sx={{ mt: 1 }}>
+              Phone Support
+            </Typography>
+            <Typography variant="body2" color="textSecondary">
+              Call our support team
+            </Typography>
+          </Card>
+        </Grid>
+      </Grid>
 
-      {/* FAQs */}
-      <div className="mb-8">
-        <h2 className="text-xl font-semibold mb-4">Frequently Asked Questions</h2>
+      {/* FAQs Section */}
+      <Box sx={{ mb: 6 }}>
+        <Typography variant="h5" gutterBottom>
+          Frequently Asked Questions
+        </Typography>
         {faqs.map((faq, index) => (
-          <div
+          <Card
             key={index}
-            className="border rounded-lg overflow-hidden mb-3"
-            onClick={() => setOpenSection(openSection === index ? null : index)}
+            sx={{
+              mb: 2,
+              boxShadow: 2,
+              borderRadius: 2,
+            }}
           >
-            <div className="p-4 cursor-pointer flex justify-between items-center">
-              <h3 className="font-medium">{faq.question}</h3>
-              {openSection === index ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />}
-            </div>
-            {openSection === index && (
-              <div className="bg-gray-50 p-4">
-                <p className="text-gray-700">{faq.answer}</p>
-              </div>
-            )}
-          </div>
+            <CardContent>
+              <Box
+                sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
+              >
+                <Typography variant="h6">{faq.question}</Typography>
+                <IconButton
+                  onClick={() => setOpenSection(openSection === index ? null : index)}
+                >
+                  {openSection === index ? (
+                    <ChevronUp sx={{ fontSize: 24 }} />
+                  ) : (
+                    <ChevronDown sx={{ fontSize: 24 }} />
+                  )}
+                </IconButton>
+              </Box>
+              <Collapse in={openSection === index} timeout="auto" unmountOnExit>
+                <Box sx={{ mt: 2 }}>
+                  <Typography variant="body2" color="textSecondary">
+                    {faq.answer}
+                  </Typography>
+                </Box>
+              </Collapse>
+            </CardContent>
+          </Card>
         ))}
-      </div>
+      </Box>
 
       {/* Contact Information */}
-      <div className="p-6 border rounded-lg">
-        <h2 className="text-xl font-semibold mb-4">Still Need Help?</h2>
-        <p className="text-gray-600 mb-4">
+      <Card sx={{ p: 4, boxShadow: 2 }}>
+        <Typography variant="h5" gutterBottom>
+          Still Need Help?
+        </Typography>
+        <Typography variant="body1" color="textSecondary" sx={{ mb: 3 }}>
           Our support team is available 24/7 to help you with any questions or issues.
-        </p>
-        <div className="space-y-2">
-          <p className="flex items-center gap-2">
-            <MessageSquare className="h-5 w-5 text-blue-600" />
+        </Typography>
+        <Divider sx={{ mb: 2 }} />
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+          <Typography variant="body2" color="primary">
+            <MessageSquare sx={{ fontSize: 18, verticalAlign: 'middle', mr: 1 }} />
             support@investnet.com
-          </p>
-          <p className="flex items-center gap-2">
-            <PhoneCall className="h-5 w-5 text-blue-600" />
+          </Typography>
+          <Typography variant="body2" color="primary">
+            <PhoneCall sx={{ fontSize: 18, verticalAlign: 'middle', mr: 1 }} />
             +1 (555) 123-4567
-          </p>
-        </div>
-      </div>
-    </div>
+          </Typography>
+        </Box>
+      </Card>
+    </Box>
   );
 };
 
