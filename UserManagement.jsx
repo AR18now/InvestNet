@@ -1,5 +1,18 @@
 import React from 'react';
 import { Edit, Trash2 } from 'lucide-react';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  IconButton,
+  Button,
+  Typography,
+  Box,
+  Chip,
+} from '@mui/material';
 
 const UserManagement = () => {
   const users = [
@@ -8,56 +21,64 @@ const UserManagement = () => {
     { id: 3, name: 'Michael Brown', role: 'Admin', status: 'Active', email: 'michael@example.com' },
     { id: 4, name: 'Emma Davis', role: 'Investor', status: 'Inactive', email: 'emma@example.com' },
   ];
-  
+
+  const getStatusColor = (status) => {
+    switch (status) {
+      case 'Active':
+        return 'success';
+      case 'Pending':
+        return 'warning';
+      case 'Inactive':
+        return 'error';
+      default:
+        return 'default';
+    }
+  };
+
   return (
-    <div className="user-management-container">
-      <div className="user-management-content">
-        <div className="user-management-header">
-          <h2 className="section-title">User Management</h2>
-          <button className="add-user-button">
-            Add User
-          </button>
-        </div>
-        
-        <div className="table-container">
-          <table className="users-table">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Role</th>
-                <th>Status</th>
-                <th>Email</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {users.map(user => (
-                <tr key={user.id}>
-                  <td className="user-name">{user.name}</td>
-                  <td className="user-role">{user.role}</td>
-                  <td>
-                    <span className={`status-badge status-${user.status.toLowerCase()}`}>
-                      {user.status}
-                    </span>
-                  </td>
-                  <td className="user-email">{user.email}</td>
-                  <td>
-                    <div className="action-buttons">
-                      <button className="edit-button">
-                        <Edit className="action-icon" />
-                      </button>
-                      <button className="delete-button">
-                        <Trash2 className="action-icon" />
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
+    <Box sx={{ padding: 3 }}>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
+        <Typography variant="h6">User Management</Typography>
+        <Button variant="contained" color="primary">
+          Add User
+        </Button>
+      </Box>
+      <TableContainer>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Name</TableCell>
+              <TableCell>Role</TableCell>
+              <TableCell>Status</TableCell>
+              <TableCell>Email</TableCell>
+              <TableCell>Actions</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {users.map((user) => (
+              <TableRow key={user.id}>
+                <TableCell>{user.name}</TableCell>
+                <TableCell>{user.role}</TableCell>
+                <TableCell>
+                  <Chip label={user.status} color={getStatusColor(user.status)} size="small" />
+                </TableCell>
+                <TableCell>{user.email}</TableCell>
+                <TableCell>
+                  <Box sx={{ display: 'flex', gap: 1 }}>
+                    <IconButton color="primary">
+                      <Edit />
+                    </IconButton>
+                    <IconButton color="error">
+                      <Trash2 />
+                    </IconButton>
+                  </Box>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Box>
   );
 };
 
