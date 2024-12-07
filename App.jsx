@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './App.css';
+//import './App.css';
 import AdminDashboard from './components/ui/AdminDashboard';
 import AuthPages from './AuthPages';
 
