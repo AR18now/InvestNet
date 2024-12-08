@@ -1,0 +1,73 @@
+.profile-views-page {
+  display: flex;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+  background-color: #f8f9fa;
+}
+
+/* Insights Summary */
+.insights-summary {
+  margin-bottom: 30px;
+}
+.insights-summary .stats {
+  display: flex;
+  gap: 20px;
+}
+.stat-card {
+  flex: 1;
+  padding: 15px;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  text-align: center;
+}
+.stat-card h3 {
+  font-size: 24px;
+  color: #0073b1;
+}
+
+/* Recent Viewers */
+.recent-viewers ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+.viewer-card {
+  background-color: #ffffff;
+  padding: 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+}
+
+/* Search Activity */
+.search-activity .activity-details {
+  display: flex;
+  gap: 20px;
+}
+.search-activity ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Post Engagement */
+.post-engagement ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+.post-card {
+  background-color: #ffffff;
+  padding: 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+}

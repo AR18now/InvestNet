@@ -1,0 +1,15 @@
+/* body {
+  all: unset;
+} */
+
+
+.profile-page {
+  display: flex;
+
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+  background-color: #f9f9f9;
+}

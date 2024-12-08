@@ -1,0 +1,115 @@
+.message-list {
+    width: 30%;
+    border-right: 1px solid var(--light-gray);
+    padding: 20px;
+    background-color: #fff;
+    overflow-y: auto;
+  }
+  
+  .message-list h3 {
+    font-size: 18px;
+    color: var(--primary-color);
+  }
+  
+  .message-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .message-list li {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .message-list li:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .message-list .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .conversation-details h4 {
+    margin: 0;
+    font-size: 16px;
+    color: var(--text-color);
+  }
+  
+  .conversation-details p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .chat-window {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+  }
+  
+  .chat-window h3 {
+    margin-bottom: 20px;
+    color: var(--primary-color);
+  }
+  
+  .messages {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    padding-right: 10px;
+  }
+  
+  .message {
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 8px;
+    width: fit-content;
+    max-width: 70%;
+  }
+  
+  .message-incoming {
+    background-color: #f0f0f0;
+    align-self: flex-start;
+  }
+  
+  .message-outgoing {
+    background-color: var(--primary-color);
+    color: #fff;
+    align-self: flex-end;
+  }
+  
+  .message-input {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .message-input input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid var(--light-gray);
+    border-radius: 20px;
+  }
+  
+  .message-input button {
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .message-input button:hover {
+    background-color: #005f5f;
+  }
+  

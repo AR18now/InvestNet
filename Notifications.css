@@ -1,0 +1,73 @@
+/* Container that holds the sidebar and main content */
+.notifications-container {
+  display: flex;
+  width: 100%;
+}
+
+/* Sidebar styles */
+.sidebar {
+  width: 200px;
+  border-right: 1px solid #ccc;
+  padding: 20px;
+  background-color: #008b8b; /* Keep the color of the sidebar same */
+  height: 100vh;
+  position: relative;
+}
+
+/* Main content area */
+.notifications-content {
+  flex: 1;
+  margin-left: 0px; /* To create space for the sidebar */
+  padding: 20px;
+  background-color: #fafafa;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+/* Content wrapper where search bar and notifications will be displayed */
+.content-wrapper {
+  width: 80%; /* Maintain 80% width */
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Search bar styling */
+.search-bar {
+  margin-bottom: 0px;
+}
+
+.search-bar input {
+  width: 98%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+/* Notification list */
+.notification-list {
+  margin-top: 20px;
+}
+
+.notification-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.notification-message {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.notification-time {
+  font-size: 12px;
+  color: #777;
+}
+
+.notification-card:hover {
+  box-shadow: 0 10px 12px rgba(0, 0, 0, 0.2);
+}

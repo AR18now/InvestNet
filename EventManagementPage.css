@@ -1,0 +1,83 @@
+.event-management-page {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  
+  .content-container {
+    display: flex;
+    flex: 1;
+  }
+  
+  .event-content {
+    flex: 1;
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+  
+  /* Add Event Section */
+  .add-event {
+    background: #ffffff;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .event-form input,
+  .event-form textarea {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .event-form button {
+    padding: 10px 15px;
+    background-color: #008b8b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .event-form button:hover {
+    background-color: #006666;
+  }
+  
+  /* Event List Section */
+  .event-list {
+    background: #ffffff;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+  }
+  
+  .event-card {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+  }
+  
+  .event-card h3 {
+    margin: 0 0 5px;
+  }
+  
+  .event-card p {
+    margin: 5px 0;
+  }
+  
+  .event-card button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .event-card button:hover {
+    background-color: #cc0000;
+  }
+  

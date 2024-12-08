@@ -1,0 +1,140 @@
+/* Reset */
+.login-page * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Login Page Styles */
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(120deg, #2980b9, #6dd5fa);
+}
+
+/* Login Container */
+.login-page .login-container {
+  width: 800px;
+  height: 500px;
+  background: #fff;
+  display: flex;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Form Section */
+.login-page .login-form-section {
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #f7f9fc;
+}
+
+.login-page .login-title {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.login-page .login-subtitle {
+  color: #666;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.login-page .login-form {
+  width: 100%;
+}
+
+.login-page .login-form .form-group {
+  margin-bottom: 20px;
+}
+
+.login-page .login-form .form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #444;
+}
+
+.login-page .login-form .form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  outline: none;
+}
+
+.login-page .login-button {
+  width: 100%;
+  padding: 10px;
+  background: #2980b9;
+  color: #fff;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.login-page .login-button:hover {
+  background: #1c598a;
+}
+
+/* Google Sign-In Button */
+.login-page .google-signin-button {
+  margin-top: 20px;
+  width: 100%;
+  padding: 10px;
+  background: #fff;
+  border: 1px solid #4285f4;
+  color: #4285f4;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.login-page .google-signin-button:hover {
+  background: #eef4ff;
+}
+
+/* Footer Section */
+.login-page .login-footer {
+  margin-top: 20px;
+  color: #555;
+}
+
+.login-page .login-footer a {
+  color: #2980b9;
+  text-decoration: none;
+}
+
+.login-page .login-footer a:hover {
+  text-decoration: underline;
+}
+
+/* Password Visibility Button */
+.login-page .password-field-container {
+  display: flex;
+  align-items: center;
+}
+
+.login-page .show-password-btn {
+  background: none;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.login-page .show-password-btn:focus {
+  outline: none;
+}
